@@ -12,6 +12,8 @@ package net.dalu2048.wechatgenius;
 
 import android.content.ContentValues;
 
+import net.dalu2048.wechatgenius.xposed.WechatUtils;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -58,6 +60,18 @@ public final class MainXposed implements IXposedHookLoadPackage {
                         }
                         //打印出日志
                         printInsertLog(tableName, (String) param.args[1], contentValues, (Integer) param.args[3]);
+
+                        //提取消息内容
+                        //1：表示是自己发送的消息
+                        int isSend = contentValues.getAsInteger("isSend");
+                        //消息内容
+                        String strContent = contentValues.getAsString("content");
+                        //说话人ID
+                        String strTalker = contentValues.getAsString("talker");
+                        //收到消息，进行回复（要判断不是自己发送的、不是群消息、不是公众号消息，才回复）
+                        if (isSend != 1 && !strTalker.endsWith("@chatroom") && !strTalker.startsWith("gh_")) {
+                            WechatUtils.replyTextMessage(loadPackageParam, "回复：" + strContent, strTalker);
+                        }
                     }
                 });
     }
