@@ -23,6 +23,8 @@
             android:value="82" />
 
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".ui.user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
