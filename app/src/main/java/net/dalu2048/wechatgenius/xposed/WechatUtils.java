@@ -56,6 +56,5 @@ public class WechatUtils {
             XposedBridge.log("调用微信消息回复方法异常");
             XposedBridge.log(e);
         }
-
     }
 }

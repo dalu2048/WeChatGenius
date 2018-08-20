@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">微信聊天精灵</string>
     <string name="xposed_description">微信聊天精灵，按关键词匹配实现微信自动回复。</string>
+    <string name="activity_title_main">微信聊天精灵</string>
 </resources>

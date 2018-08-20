@@ -59,7 +59,7 @@ public final class MainXposed implements IXposedHookLoadPackage {
                             return;
                         }
                         //打印出日志
-                        printInsertLog(tableName, (String) param.args[1], contentValues, (Integer) param.args[3]);
+//                        printInsertLog(tableName, (String) param.args[1], contentValues, (Integer) param.args[3]);
 
                         //提取消息内容
                         //1：表示是自己发送的消息
