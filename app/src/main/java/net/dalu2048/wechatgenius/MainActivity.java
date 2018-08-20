@@ -3,8 +3,10 @@ package net.dalu2048.wechatgenius;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -12,6 +14,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import net.dalu2048.wechatgenius.entity.AppInfo;
+import net.dalu2048.wechatgenius.net.HttpRequest;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +40,17 @@ public class MainActivity extends Activity {
         AppInfo.getInstance().ValidateEnvironment(this);
         //初始化QMUIGroupListView
         initMainContentView();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //请求网络
+                HttpRequest httpRequest = new HttpRequest();
+                String strResponse = httpRequest.getData();
+                Log.d(TAG, strResponse);
+            }
+        }).start();
+
     }
 
     //初始化状态栏
@@ -55,7 +69,7 @@ public class MainActivity extends Activity {
         QMUICommonListItemView listItemSystem = mGroupListView.createItemView("系统版本");
         listItemSystem.setDetailText("Android V" + appInfo.getAndroidVersionName());
         boolResult = appInfo.isSupportAndroid();
-        listItemSystem.setImageDrawable(ContextCompat.getDrawable(this, boolResult? R.drawable.qmui_icon_checkbox_checked : R.mipmap.icon_error));
+        listItemSystem.setImageDrawable(ContextCompat.getDrawable(this, boolResult ? R.drawable.qmui_icon_checkbox_checked : R.mipmap.icon_error));
         //是否已ROOT
         QMUICommonListItemView listItemRoot = mGroupListView.createItemView("是否ROOT");
         boolResult = appInfo.isDeviceRooted();

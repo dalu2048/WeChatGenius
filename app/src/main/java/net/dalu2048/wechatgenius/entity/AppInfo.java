@@ -83,7 +83,7 @@ public final class AppInfo {
         return false;
     }
 
-    //获取微信版本是否包含在支持列表中
+    //获取Android版本是否包含在支持列表中
     private boolean isContainAndroidVersion() {
         if (mAndroidVersionName == null) {
             return false;

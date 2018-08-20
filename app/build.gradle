@@ -31,6 +31,8 @@ dependencies {
     //Xposed框架
     compileOnly 'de.robv.android.xposed:api:82'
     compileOnly 'de.robv.android.xposed:api:82:sources'
+    //网络请求框架
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
