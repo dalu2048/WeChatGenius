@@ -17,6 +17,8 @@ import android.content.pm.PackageManager;
 import java.util.List;
 
 public final class AppUtils {
+    //安装包
+    public static final String PACKAGE_NAME_WECHAT = "com.tencent.mm";
     public static final String PACKAGE_NAME_XPOSED = "de.robv.android.xposed.installer";
 
     //获取APP的安装版本号。未安装，返回空字符串。
