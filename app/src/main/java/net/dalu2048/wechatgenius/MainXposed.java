@@ -16,6 +16,7 @@ import net.dalu2048.wechatgenius.xposed.WechatUtils;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -23,11 +24,28 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 public final class MainXposed implements IXposedHookLoadPackage {
     //微信数据库包名称
     private static final String WECHAT_DATABASE_PACKAGE_NAME = "com.tencent.wcdb.database.SQLiteDatabase";
+    //聊天精灵客户端包名称
+    private static final String WECHATGENIUS_PACKAGE_NAME = "net.dalu2048.wechatgenius";
     //微信主进程名
     private static final String WECHAT_PROCESS_NAME = "com.tencent.mm";
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+
+        //region hook模块是否激活
+        if (lpparam.packageName.equals(WECHATGENIUS_PACKAGE_NAME)) {
+            //hook客户端APP的是否激活返回值。替换为true。
+            Class<?> classAppUtils = XposedHelpers.findClassIfExists(WECHATGENIUS_PACKAGE_NAME + ".util.AppUtils", lpparam.classLoader);
+            if (classAppUtils != null) {
+                XposedHelpers.findAndHookMethod(classAppUtils,
+                        "isModuleActive",
+                        XC_MethodReplacement.returnConstant(true));
+                XposedBridge.log("成功hook住net.xxfeng.cc.util.AppUtils的isModuleActive方法。");
+            }
+            return;
+        }
+        //endregion
+
         if (!lpparam.processName.equals(WECHAT_PROCESS_NAME)) {
             return;
         }
