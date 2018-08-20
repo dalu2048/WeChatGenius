@@ -23,6 +23,9 @@ public final class AppInfo {
     private String mAndroidVersionName;
     private boolean mIsDeviceRooted;   //设备是否ROOT
     private boolean mIsSupportAndroid;  //是否支持该版本Android
+    //微信精灵版本号
+    private String mVersionName;
+    private int mVersionCode;
     //Xposed是否安装
     private boolean mIsXposedInstall;
     private String mXposedVersionName;
@@ -57,6 +60,10 @@ public final class AppInfo {
         mIsDeviceRooted = ShellUtil.checkRootPermission();
         //Android系统版本
         mAndroidVersionName = Build.VERSION.RELEASE;
+
+        //获取微信精灵版本号
+        mVersionName = AppUtils.getVersionName(context);
+        mVersionCode = AppUtils.getVersionCode(context);
         //判断微信
         mWechatVersionName = AppUtils.getAppVersionName(context, AppUtils.PACKAGE_NAME_WECHAT);
         mIsWechatInstall = !StringUtils.isEmpty(getWechatVersionName());
@@ -163,5 +170,21 @@ public final class AppInfo {
 
     public void setSupportWechat(boolean supportWechat) {
         mIsSupportWechat = supportWechat;
+    }
+
+    public String getVersionName() {
+        return mVersionName;
+    }
+
+    public void setVersionName(String versionName) {
+        mVersionName = versionName;
+    }
+
+    public int getVersionCode() {
+        return mVersionCode;
+    }
+
+    public void setVersionCode(int versionCode) {
+        mVersionCode = versionCode;
     }
 }

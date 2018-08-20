@@ -21,6 +21,31 @@ public final class AppUtils {
     public static final String PACKAGE_NAME_WECHAT = "com.tencent.mm";
     public static final String PACKAGE_NAME_XPOSED = "de.robv.android.xposed.installer";
 
+    //获取当前APP的版本
+    public static String getVersionName(Context context) {
+        //PackageManager 可以获取清单文件中的所有信息
+        PackageManager manager = context.getPackageManager();
+        try {
+            //getPackageName()获取到当前程序的包名
+            PackageInfo packageInfo = manager.getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    //获取当前APP的versionCode
+    public static int getVersionCode(Context context) {
+        PackageManager manager = context.getPackageManager();
+        try {
+            return manager.getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     //获取APP的安装版本号。未安装，返回空字符串。
     public static String getAppVersionName(Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();

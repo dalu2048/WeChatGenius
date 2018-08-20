@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ *************************************************************
+  ~ 文件：activity_about.xml  模块：app  项目：WeChatGenius
+  ~ 当前修改时间：2018年08月20日 19:34:19
+  ~ 上次修改时间：2018年08月20日 19:34:19
+  ~ 作者：大路
+  ~ Copyright (c) 2018
+  ~ *************************************************************
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/app_primary_color"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.AboutActivity">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/qmui_config_color_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <!--LOGO-->
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/qmui_content_padding_horizontal"
+                android:padding="@dimen/common_content_spacing"
+                android:src="@mipmap/logo"
+                app:qmui_border_color="?attr/qmui_config_color_gray_6"
+                app:qmui_border_width="1px"
+                app:qmui_corner_radius="15dp" />
+            <!--版本名称-->
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="?attr/qmui_config_color_gray_3"
+                android:textSize="16sp" />
+
+            <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                android:id="@+id/about_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/copyright"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:textColor="?attr/qmui_config_color_gray_7" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
